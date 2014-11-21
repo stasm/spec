@@ -1,4 +1,4 @@
-webapp-langpacks
-================
+spec
+====
 
-A specification for Language PAckages for Open Web Apps
+A collection of specification draft for features I've been working on.
