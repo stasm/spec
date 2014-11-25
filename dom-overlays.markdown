@@ -34,16 +34,12 @@ Consider the following paragraph taken from
 
 The HTML code for this paragraph is this:
 
-{% highlight html %}
-
     <p>
         Portions of this content are ©1998–2012 by individual 
         mozilla.org contributors. Content available under a <a 
         href="/foundation/licensing/website-content.html">Creative 
         Commons license</a>.
     </p>
-
-{% endhighlight %}
 
 Take note of the `a` tag with an `href` attribute.  The `href` is a URL, and it 
 makes this HTML significantly harder to read.  Furthermore, the URL will always 
@@ -67,31 +63,29 @@ better semantical markup.
 Goals
 -----
 
-    1. Make it possible to localize content in HTML elements and 
-       attributes without forcing developers to split strings into pre- 
-       and post- parts (definitely a bad practice).  For instance, it 
-       should be possible for an <a> element to be a part of the 
-       translation.
+  1. Make it possible to localize content in HTML elements and attributes 
+     without forcing developers to split strings into pre- and post- parts 
+     (definitely a bad practice).  For instance, it should be possible for an
+     `<a>` element to be a part of the translation.
 
-    2. Make it possible for localizers to apply text-level semantics to 
-       the translations and make use of HTML entities.  For instance, 
-       it should be possible for a localizer to use an <sup> element in 
-       "M<sup>me</me>" (an abbreviation of French "Madame").
+  2. Make it possible for localizers to apply text-level semantics to the 
+     translations and make use of HTML entities.  For instance, it should be 
+     possible for a localizer to use an <sup> element in "M<sup>me</me>" (an 
+     abbreviation of French "Madame").
 
 
 Constraints
 -----------
 
-    1. Make the whole system secure and don't trust translations by 
-       default allowing a safe set of attributes on HTML elements.  For 
-       instance, the localizer should not be able to add an onclick 
-       handler or overwrite the target of href or src without the 
-       developer or the localization engineer knowingly allowing it.
+  1. Make the whole system secure and don't trust translations by default 
+     allowing a safe set of attributes on HTML elements.  For instance, the 
+     localizer should not be able to add an onclick handler or overwrite the 
+     target of href or src without the developer or the localization engineer 
+     knowingly allowing it.
 
-    2. Don't break the Web;  in particular, until we get more feedback 
-       and gather more data, we should not break any two-way bindings 
-       the third-party libraries might have set up on existing DOM 
-       nodes.
+  2. Don't break the Web;  in particular, until we get more feedback and 
+     gather more data, we should not break any two-way bindings the 
+     third-party libraries might have set up on existing DOM nodes.
 
 
 Text-level semantic elements
