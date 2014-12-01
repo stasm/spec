@@ -132,8 +132,9 @@ makes this HTML significantly harder to read.  Furthermore, the URL will always
 be `/foundation/licensing/website-content.html` in this case, regardless of the 
 user's locale.  It makes little sense, then, to have it in the source string.  
 The tag makes the string harder to read and increases the risk of a localizer 
-introducing an error (e.g., removing a quotation mark or accidentally editing 
-the URL).
+introducing an error (e.g., by removing a quotation mark or accidentally 
+editing the URL).  Most of the localization tools don't check for HTML 
+syntax errors either.
 
 In fact, the `href` attribute is part of the document's structure rather than 
 its source content, and as such, does not belong in the localization string at 
