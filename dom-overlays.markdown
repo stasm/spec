@@ -59,7 +59,7 @@ Goals
 
   2. Make it possible for localizers to apply text-level semantics to the 
      translations and make use of HTML entities.  For instance, it should be 
-     possible for a localizer to use an <sup> element in "M<sup>me</me>" (an 
+     possible for a localizer to use a `sup` element in "M<sup>me</sup>" (an 
      abbreviation of French "Madame") even if the original source string 
      doesn't contain the `sup` element.
 
