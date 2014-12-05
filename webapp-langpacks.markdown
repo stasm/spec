@@ -62,10 +62,12 @@ This method returns a `DOMRequest` which resolves to an object with installed
 additional languages available for the current apps as keys:
 
     {
-      "de": {
-        "target": "2.2",
-        "version": 201411051234
-      }
+      "de": [
+        {
+          "target": "2.2",
+          "version": 201411051234
+        }
+      ]
     }
 
   1. The signature of this method could also accept a second argument to 
@@ -76,9 +78,11 @@ additional languages available for the current apps as keys:
      …which would return:
 
          {
-           "de": {
-             "version": 201411051234
-           }
+           "de": [
+             {
+               "version": 201411051234
+             }
+           ]
          }
 
 The information about the bundled and the default languages is stored in `meta` 
