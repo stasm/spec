@@ -225,7 +225,11 @@ list of all languages now available in the chrome.
      pre-installed langpacks, which would in turn make them receive updates 
      from the Marketplace.
 
-  3. Are installed langpacks stored on the device as zips even after their 
+  3. On System Update, should the database be cleared (on the assumption that 
+     old langpacks are not good to show with newer apps)?  If so, maybe we 
+     don't need to track the version information at all?
+
+  4. Are installed langpacks stored on the device as zips even after their 
      contents are inserted to the chrome's database?  Are they instantly 
      deleted?  Does the `mozApps` object know about installed langpacks as it 
      does about all other apps?  If not, how can the Marketplace push updates 
