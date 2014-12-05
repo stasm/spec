@@ -208,9 +208,12 @@ saved in the database:
 
 For each app, each resource form the langpack (from the corresponding 
 `basepath` directory) is also saved in the DB, keyed by the app it belongs to, 
-language code, app version and and the resource path.
+language code, app version and the resource path.
 
     resource,app://email.gaiamobile.org/manifest.webapp,de,2.2,locales/email.de.properties: "foo=Foo\nbar=Bar"
+
+The `additionallanguageschange` event is dispatched on the `document` with the 
+list of all languages now available in the chrome.
 
   1. This requires a way to get the list of all files in the langpacks 
      implicitly.  See question #2 in the previous section about providing the 
@@ -223,7 +226,7 @@ language code, app version and and the resource path.
      from the Marketplace.
 
   3. Are installed langpacks stored on the device as zips even after their 
-     contents are inserted to the Chrome's database?  Are they instantly 
+     contents are inserted to the chrome's database?  Are they instantly 
      deleted?  Does the `mozApps` object know about installed langpacks as it 
      does about all other apps?  If not, how can the Marketplace push updates 
      to the installed langpacks?
