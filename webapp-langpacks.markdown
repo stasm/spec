@@ -209,8 +209,20 @@ and the resource path.
     resource,app://email.gaiamobile.org/manifest.webapp,2.2,locales/email.de.properties: "foo=Foo\nbar=Bar"
 
   1. This requires a way to get the list of all files in the langpacks 
-     implicitly.  See question #2 above about providing the list explicitly in 
-     langpack's manifest.
+     implicitly.  See question #2 in the previous section about providing the 
+     list explicitly in langpack's manifest.
+
+  2. Is it possible to run the installation procedure during buildtime or the 
+     first launch of the system in order to install any pre-built langpacks?  
+     This would allow us to dirtibute all locales, even the bundled ones, as 
+     pre-installed langpacks, which would in turn make them receive updates 
+     from the Marketplace.
+
+  3. Are installed langpacks stored on the device as zips even after their 
+     contents are inserted to the Chrome's database?  Are they instantly 
+     deleted?  Does the `mozApps` object know about installed langpacks as it 
+     does about all other apps?  If not, how can the Marketplace push updates 
+     to the installed langpacks?
     
 
 Language Negotiation and Resource IO, with Langpacks
