@@ -124,7 +124,7 @@ langpacks (from the step before), it can decide which method of IO to use:
     XHR requests.
 
   - For languages provided by langpacks, the resources are fetched via the 
-    `mozApps.getResource()` native API (see below).
+    `mozApps.getLocalizationResource()` native API (see below).
 
 In case of the `/locales/email.de.properties` resource, a regular XHR is used.
 
@@ -203,10 +203,10 @@ saved in the database:
     }
 
 For each app, each resource form the langpack (from the corresponding 
-`basepath` directory) is also saved in the DB, keyed by the app it belongs to 
-and the resource path.
+`basepath` directory) is also saved in the DB, keyed by the app it belongs to, 
+language code, app version and and the resource path.
 
-    resource,app://email.gaiamobile.org/manifest.webapp,2.2,locales/email.de.properties: "foo=Foo\nbar=Bar"
+    resource,app://email.gaiamobile.org/manifest.webapp,de,2.2,locales/email.de.properties: "foo=Foo\nbar=Bar"
 
   1. This requires a way to get the list of all files in the langpacks 
      implicitly.  See question #2 in the previous section about providing the 
@@ -246,35 +246,34 @@ Since 'pl' is a langpack language (one of the languages returned by
 `mozApps.getAvailableLanguages()`), l10n.js will use the native API to get the 
 resource:
 
-    mozApps.getResource(
+    mozApps.getLocalizationResource(
       'app://email.gaiamobile.org/manifest.webapp',
+      'pl',
       '2.2',
       '/locales/email.pl.properties');
 
 
-mozApps.getResource()
----------------------
+mozApps.getLocalizationResource()
+---------------------------------
 
 This API provides a way for userland code to request resources provided for 
 a specific app by some other app.
 
-    mozApps.getResource(manifestURI, appVersion, resourcePath);
+    mozApps.getLocalizationResource(
+      manifestURI, languageCode, appVersion, resourcePath);
 
 It is not a method of the `App` object to allow instant webapps (which are not 
 installed) to benefit from langpacks.
 
-The `getResource` API queries the chrome IndexedDB for 
+The `getLocalizationResource` API queries the chrome IndexedDB for 
 
-    'resource,' + manifestURI + ',' + resourcePath
+    'resource,' + manifestURI + ',' + languageCode + ',' + appVersion + ',' + resourcePath
 
 …and returns the contents stored in the DB:
 
-    resource,app://email.gaiamobile.org/manifest.webapp,2.2,locales/email.de.properties: "foo=Foo\nbar=Bar"
+    resource,app://email.gaiamobile.org/manifest.webapp,de,2.2,locales/email.de.properties: "foo=Foo\nbar=Bar"
 
-  1. The locale code is already declared in the resource path;  should we also 
-     pass it as an argument to `getResource`?
-
-  2. In which form do we store resource contents in the DB?  Raw string with 
+  1. In which form do we store resource contents in the DB?  Raw string with 
      the contents of the .properties file?  Parsed JSON?  ZIP of the langpack?
 
 
@@ -291,21 +290,22 @@ For Homescreen, the code in [Gaia Grid][] is responsible for returning the
 localized name of the app.  For other places, a helper class called the 
 [ManifestHelper][] is responsible for returning the localized app names. 
 
-Both can use the `mozApps.getResource()` API to fetch the 
+Both can use the `mozApps.getLocalizationResource()` API to fetch the 
 `manifest.{locale}.properties` file if the translation has not been found in the 
 app's manifest.
 
-    mozApps.getResource(
+    mozApps.getLocalizationResource(
       'app://email.gaiamobile.org/manifest.webapp',
+      'pl',
       '2.2',
       '/manifest.pl.properties');
 
   1. How can this code know whether to fetch from the app's 
-     `manifest.webapp` or to use `mozApps.getResource()`?  It could 
+     `manifest.webapp` or to use `mozApps.getLocalizationResource()`?  It could 
      first try the former and resort to the latter.
 
-  2. This assumes `mozApps.getResource()` requests can span different domain.  
-     How can we avoid this?
+  2. This assumes `mozApps.getLocalizationResource()` requests can span 
+     different domain.  How can we avoid this?
 
 [Gaia grid]: https://github.com/mozilla-b2g/gaia/blob/a6c295a7a6bddf5bcd42d970725300c4c30760b8/shared/elements/gaia_grid/js/items/mozapp.js#L169-L180
 [ManifestHelper]: https://github.com/mozilla-b2g/gaia/blob/a6c295a7a6bddf5bcd42d970725300c4c30760b8/shared/js/manifest_helper.js
@@ -330,7 +330,7 @@ Platform Team:
 
   - Write support for Langpacks API
     - `mozApps.sgetAdditionalLanguages`
-    - `mozApps.getResource`
+    - `mozApps.getLocalizationResource`
   - Write custom logic for language pack installation.
   - Write logic for storing and retrieving resources in chrome’s IndexedDB.
   - Write logic for firing `additionallanguageschange` event.
@@ -365,8 +365,8 @@ Gaia Team:
     - React to the `additionallanguageschange` event in 
       `shared/js/language_list.js`.
   - Homescreen:  Add support for retrieving localized names of applications 
-    from langpacks via `mozApps.getResource`.
-  - Shared:  Use `mozApps.getResource` in `shared/js/manifest_helper.js` in 
+    from langpacks via `mozApps.getLocalizationResource`.
+  - Shared:  Use `mozApps.getLocalizationResource` in `shared/js/manifest_helper.js` in 
     order to provide localized app names for the Cards view, the Task Manager, 
     the Rocketbar and the Settings > App Permissions panel.
   - Input method: keyboard layout should fall back to `GAIA_DEFAULT_LOCALE` if 
