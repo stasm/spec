@@ -142,6 +142,19 @@ override requests to certain origins.  A single langpack can contain resources
 for multiple apps and multiple languages.  An example of a langpack manifest 
 with the origin `my-langpack.gaiamobile.org` looks like this:
 
+    "name": "Gaia Langpack for German and Polish",
+    "description": "Support for additional languages: German and Polish",
+    "locales": {
+      "de": {
+        "name": "Sprachpaket für Gaia: Deutsch und Polnisch"
+      },
+      "pl": {
+        "name": "Paczka językowa dla Gai: niemiecki i polski"
+      },
+    },
+    "icons": {
+      "128": "/icon.png"
+    },
     "role": "langpack",
     "version": "1.0.3",
     "languages-target": {
@@ -149,15 +162,17 @@ with the origin `my-langpack.gaiamobile.org` looks like this:
     },
     "languages-provided": {
       "de": {
+        "name": "Deutsch",
         "version": 201411051234,
-        "origins": {
+        "apps": {
           "app://calendar.gaiamobile.org/manifest.webapp": "/de/calendar",
           "app://email.gaiamobile.org/manifest.webapp": "/de/email"
         }
       },
       "pl": {
+        "name": "Polski",
         "version": 201410292345,
-        "origins": {
+        "apps": {
           "app://calendar.gaiamobile.org/manifest.webapp": "/pl/calendar",
           "app://email.gaiamobile.org/manifest.webapp": "/pl/email"
         }
