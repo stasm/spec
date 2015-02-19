@@ -65,7 +65,7 @@ additional languages available for the current apps as keys:
       "de": [
         {
           "target": "2.2",
-          "version": 201411051234
+          "revision": 201411051234
         }
       ]
     }
@@ -80,7 +80,7 @@ additional languages available for the current apps as keys:
          {
            "de": [
              {
-               "version": 201411051234
+               "revision": 201411051234
              }
            ]
          }
@@ -163,7 +163,7 @@ with the origin `my-langpack.gaiamobile.org` looks like this:
     "languages-provided": {
       "de": {
         "name": "Deutsch",
-        "version": 201411051234,
+        "revision": 201411051234,
         "apps": {
           "app://calendar.gaiamobile.org/manifest.webapp": "/de/calendar",
           "app://email.gaiamobile.org/manifest.webapp": "/de/email"
@@ -171,7 +171,7 @@ with the origin `my-langpack.gaiamobile.org` looks like this:
       },
       "pl": {
         "name": "Polski",
-        "version": 201410292345,
+        "revision": 201410292345,
         "apps": {
           "app://calendar.gaiamobile.org/manifest.webapp": "/pl/calendar",
           "app://email.gaiamobile.org/manifest.webapp": "/pl/email"
@@ -192,8 +192,10 @@ This field is used by the Marketplace to build the list of langpacks that are
 relevant to the user's OS.
 
 The latter field, `languages-provided` field defines languages and their 
-versions for app origins.  This information is stored in device's chrome's 
-IndexedDB and used for resource IO and language negotiation.
+revisions for app origins.  This information is stored in device's chrome's 
+IndexedDB and used for resource IO and language negotiation.  The value of the 
+`revision` field must be an integer to allow comparison between language 
+revisions with the `<` and `>` operators in JavaScript.
 
   1. Can we skip the protocol part of the manifest URI in the keys of the 
      `languages_provided` object?
@@ -213,11 +215,11 @@ saved in the database:
     languages,app://email.gaiamobile.org/manifest.webapp: {
       "de": {
         "target": "2.2",
-        "version": 201411051234
+        "revision": 201411051234
       },
       "pl": {
         "target": "2.2",
-        "version": 201410292345
+        "revision": 201410292345
       },
     }
 
@@ -255,7 +257,7 @@ Language Negotiation and Resource IO, with Langpacks
 ----------------------------------------------------
 
 `mozApps.getAdditionalLanguages()` for a given app now returns the newer 
-version of `de`, as well as adds `pl` to the list of available languages.  The 
+revision of `de`, as well as adds `pl` to the list of available languages.  The 
 l10n.js library can negotiate the UI language using user's preferred languages 
 stored in `navigator.languages`.
 
@@ -407,15 +409,15 @@ L10n Team:
     - Remove the codepath which fetches the manifest to get this information;  
       from now on we will require `meta` elements to provide it inlined into 
       the HTML.
-    - Create logic which negotiates languages and their versions given the list 
+    - Create logic which negotiates languages and their revision given the list 
       of languages bundled in the app and the list returned by 
       `mozApps.getAdditionalLanguages()`.
     - Mark which negotiated languages come from the app and which come from 
       langpacks.
     - Use regular XHR or `mozAppgetResource()` accordingly.
   - Buildtime L10n.js changes:
-    - Inline information about languages and their versions in meta elements.  
-      (Right now we only inline language codes without versions).
+    - Inline information about languages and their revisions in meta elements.  
+      (Right now we only inline language codes without revisions).
 
 
 Rel Eng / Localization infrastructure:
