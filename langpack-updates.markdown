@@ -67,3 +67,36 @@ purpose:
             }
           }
         }
+
+
+Updating langpacks
+------------------
+
+Updating langpacks works in the same manner as updating regular webapps 
+does.  `App.checkForUpdate()` polls the URL of the mini-manifest, then 
+polls the URL in the `package_path` field in the mini-manifest.
+ 
+
+Option 1. Don't do anything
+---------------------------
+
+In this scenario we leave it to the user to install a new langpack 
+suitable for their current set of target apps.
+
+When Gaia updates from 2.2 to 3.0, the user needs to go to Settings 
+→ Language → Get More Languages and check if new langpack apps are 
+available for Gaia 3.0.
+
+Pros:
+
+  - Extremely simple.
+
+Cons:
+
+  - Not user-friendly.
+
+Notes:
+
+  - After an update is applied and we know that the user has langpacks 
+    installed, could we offer to open Marketplace for them to look for 
+    new langpacks?
