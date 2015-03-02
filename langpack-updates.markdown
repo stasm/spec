@@ -75,6 +75,30 @@ Updating langpacks
 Updating langpacks works in the same manner as updating regular webapps 
 does.  `App.checkForUpdate()` polls the URL of the mini-manifest, then 
 polls the URL in the `package_path` field in the mini-manifest.
+
+Langpacks can be updated for two reasons:
+
+  1. to change the revision of the provided languages (and update the 
+     localization resources within the langpack).
+  2. to change the version of the target apps,
+
+Updates of type #1 can happen multiple times when localizers fix 
+translation mistakes.  The langpack is updated to provide a newer, 
+better translation for the same version of the target app.
+
+Updates of type #2 can happen when the target app is updated.  
+Currently, this is not impemented and is in fact what this document 
+aims to describe.  Updates of type #2 can entail updates of type #1.
+
+Langpacks targeting different versions of the target app need to be 
+able to co-exist in the Marketplace.  E.g. it should be possible for 
+the langpack for Settings 2.2 and the langpack for Settings 3.0 to be 
+both available for download.  They can be different versions of the 
+same app, or two different apps.
+
+Furthermore, when the langpack for Settings 3.0 is released, it should 
+not be pushed to users with the langpack for Settings 2.2 until they 
+update their Settings app to version 3.0.
  
 
 Option 1. Don't do anything
