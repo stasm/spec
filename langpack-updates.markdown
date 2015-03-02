@@ -100,3 +100,50 @@ Notes:
   - After an update is applied and we know that the user has langpacks 
     installed, could we offer to open Marketplace for them to look for 
     new langpacks?
+
+
+Option 2. Versions of langpack app correspond to target app versions
+--------------------------------------------------------------------
+
+In this model, we could make major+minor versions of a langpack app 
+(2.2.*, 3.0.*) correspond to the versions of the target apps:
+
+
+    "version": "2.2.123",
+    "languages-target": {
+      "app://*.gaiamobile.org/manifest.webapp": "2.2"
+    }
+
+    "version": "3.0.456",
+    "languages-target": {
+      "app://*.gaiamobile.org/manifest.webapp": "3.0"
+    }
+
+Cons:
+
+  - Doesn't scale to multiple target apps included in a single 
+    langpack:
+
+        "languages-target": {
+          "app://system.gaiamobile.org/manifest.webapp": "2.2",
+          "app://settings.gaiamobile.org/manifest.webapp": "3.0"
+        }
+
+Notes:
+
+  - This requires a change to the `App.checkForUpdate()` API so that 
+    the platform doesn't install a newer version of a langpack if the 
+    target app hasn't been yet updated.  E.g. a langpack providing 
+    resources of Settings 2.2 shouldn't be updated to version 3.0.0 if 
+    the Settings app is still in version 2.2.
+
+  - Can the Marketplace expose multiple versions of langpacks depending on the 
+    fxos_version query argument?
+
+    Example:
+
+        https://marketplace.firefox.com/api/v2/langpacks/?dev=firefoxos&fxos_version=2.2
+        https://marketplace.firefox.com/api/v2/langpacks/?dev=firefoxos&fxos_version=3.0
+
+    The langpacks listed by these API calls would be different versions 
+    of the same langack apps.
