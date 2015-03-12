@@ -168,6 +168,11 @@ versions.
 With this extention, Proposal #1 could be made to work with versions of 
 the same langpack app.
 
+Notes:
+
+  - Is it possible to offer multiple versions of one app on the 
+    Marketplace or is the newest one always the only one available?
+
 
 Proposal 3. Listen to Webapps being updated and notify the user
 -------------------------------------------------------------
