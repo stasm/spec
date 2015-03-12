@@ -190,7 +190,7 @@ Proposal 4. Versions of langpack app correspond to target app versions
 --------------------------------------------------------------------
 
 In this model, we could make major+minor versions of a langpack app 
-(2.2.*, 3.0.*) correspond to the versions of the target apps:
+(2.2.\*, 3.0.\*) correspond to the versions of the target apps:
 
 
     "version": "2.2.123",
