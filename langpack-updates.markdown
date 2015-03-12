@@ -181,7 +181,9 @@ This is similar to Option 1 in that it makes the user responsible for
 installing a new langpack app.  It assists the user by listening to 
 Webapps.jsm broadcasts about apps being updated and compares the 
 manifest URLs of updated app to the URLs stored in Langpacks.jsm's 
-`_data` store.
+`_data` store.  When an app for which the user has installed a langpack 
+is updated we can offer to open the Marketplace listing with langpacks 
+for this app and the new version.
 
 
 Proposal 4. Versions of langpack app correspond to target app versions
