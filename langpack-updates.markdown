@@ -221,3 +221,27 @@ Notes:
     resources of Settings 2.2 shouldn't be updated to version 3.0.0 if 
     the Settings app is still in version 2.2.
 
+
+When no langpack is available for the new version…
+--------------------------------------------------
+
+It's interesting to consider what happens when an app is updated but no 
+langpacks (in general or in the user's preferred languages) are 
+available for it yet.
+
+  1. Strict compatibility:  langpacks for old versions of the app don't 
+     work for the new version.  The new version is now displayed in one 
+     of the fallback languages.
+
+  2. Lax compatibility:  langpacks for old versions of the app continue 
+     to be used to the new versions.  This creates a better transition 
+     experience for the users (apps don't revert to their default 
+     languages when they're updated) but also increases the risk of the 
+     user seeing untranslated messages.  The more of those, the more 
+     jarring the experience.
+
+  3. Dependency awareness:  in this scenario, app updates would be 
+     conditional on other apps (and their vesions) being available for 
+     update/installation as well.  An update to an app would not be 
+     pushed to the user if the langpack is not available yet.
+
